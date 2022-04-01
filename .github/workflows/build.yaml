@@ -25,11 +25,11 @@ jobs:
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Create an issue
-        uses: JasonEtco/create-an-issue@v2.6.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ENVIRONMENT: Dev
-          RUNNUMBER: ${{ github.run_number  }}
-          TAG: ${{ steps.vars.outputs.sha_short }}
-        with:
-          filename: .github/deploy-issue-template.md
+      uses: JasonEtco/create-an-issue@v2.6.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ENVIRONMENT: Dev
+        RUNNUMBER: ${{ github.run_number  }}
+        TAG: ${{ steps.vars.outputs.sha_short }}
+      with:
+        filename: .github/deploy-issue-template.md
