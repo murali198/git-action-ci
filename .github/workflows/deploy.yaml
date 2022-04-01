@@ -11,7 +11,6 @@ jobs:
     outputs:
       deploy-environment: ${{ fromJSON(steps.issue_body_parser.outputs.payload).environment }}
       ci-run-number: ${{ fromJSON(steps.issue_body_parser.outputs.payload).runNumber }}
-      image-tag: ${{ fromJSON(steps.issue_body_parser.outputs.payload).imageTag }}
     steps:
       - name: Comment on Issue
         uses: peter-evans/create-or-update-comment@v1
@@ -44,7 +43,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ENVIRONMENT: Prod
           RUNNUMBER: ${{ needs.parse.outputs.ci-run-number }}
-          TAG: ${{ needs.parse.outputs.image-tag }}
         with:
           filename: .github/deployment-approval.md
 
