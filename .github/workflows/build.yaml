@@ -21,8 +21,8 @@ jobs:
       run: mvn clean install --file pom.xml
 
     - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Create an issue
         uses: JasonEtco/create-an-issue@v2.6.0
