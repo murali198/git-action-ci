@@ -11,6 +11,7 @@ jobs:
     outputs:
       deploy-environment: ${{ fromJSON(steps.issue_body_parser.outputs.payload).environment }}
       ci-run-number: ${{ fromJSON(steps.issue_body_parser.outputs.payload).runNumber }}
+      image-tag: ${{ fromJSON(steps.issue_body_parser.outputs.payload).imageTag }}
     steps:
       - name: Comment on Issue
         uses: peter-evans/create-or-update-comment@v1
@@ -32,7 +33,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        name: Checkout the code
 
       - name: Deploy to DEV
         run: echo Deploying to Dev env
@@ -43,8 +45,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ENVIRONMENT: Prod
           RUNNUMBER: ${{ needs.parse.outputs.ci-run-number }}
+          TAG: ${{ needs.parse.outputs.image-tag }}
         with:
-          filename: .github/deployment-approval.md
+          filename: .github/deploy-issue-template.md
 
   deploy-prod:
     needs: [parse]
@@ -52,6 +55,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+        name: Checkout the code
 
       - name: Deploy to PROD
         run: echo Simulating Deployment
