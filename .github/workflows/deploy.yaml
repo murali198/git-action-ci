@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    uses: murali198/common-workflow/.github/workflows/azure-k8s-helm-deploy.yml@main
+    uses: murali198/common-workflow/.github/workflows/deploy-demo.yml@main
     with:
       cluster_name: "ofsakscluster-dev"
       cluster_resource_group: "ofsmz-aks-rg-dev"
@@ -17,6 +17,6 @@ jobs:
       chart_path: "./config/helm/"
       helm_file: "./config/helm/values-dev.yaml"
     secrets:
-      azure_cred: ${{ secrets.AZURE_CREDENTIALS }}
-      registry_username: ${{ secrets.REGISTRY_USERNAME }}
-      registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+      azure_cred: "123"
+      registry_username: "123"
+      registry_password: "123"
