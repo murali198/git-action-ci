@@ -2,14 +2,15 @@ name: build
 
 on:
   workflow_dispatch:
-
+  push:
+    branches: [main]
 jobs:
   build:
-    uses: murali198/common-workflow/.github/workflows/build-demo.yml@main
+    uses: murali198/common-workflow/.github/workflows/java-maven-azure-build.yml@main
     with:
       java_version: "11"
-      registry_name: "123"
+      registry_name: "ofscontainerregistrydev"
       image_name: "actions-sample"
     secrets:
-      registry_username: "123"
-      registry_password: "123"
+      registry_username: ${{ secrets.REGISTRY_USERNAME }}
+      registry_password: ${{ secrets.REGISTRY_PASSWORD }}

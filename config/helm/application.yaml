@@ -1,0 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: httptrace, health, metrics, info
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.test.helloworld: TRACE
